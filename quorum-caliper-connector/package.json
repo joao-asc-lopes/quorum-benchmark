@@ -1,0 +1,17 @@
+{
+    "name": "quorum-caliper-connector",
+    "description": "Quorum connector for Caliper, enabling the running of performance benchmarks that interact with Quorum",
+    "version": "0.0.1",
+    "scripts": {
+        "lint": "eslint . --fix"
+    },
+    "dependencies": {
+        "@hyperledger/caliper-core": "0.5.0",
+        "ethereumjs-wallet": "^1.0.2",
+        "web3-eea": "0.11.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.36.0"
+    },
+    "license": "MIT"
+}
