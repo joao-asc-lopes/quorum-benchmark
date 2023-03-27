@@ -14,7 +14,6 @@
 
 'use strict';
 
-const EthereumHDKey = require('ethereumjs-wallet/hdkey');
 const Web3 = require('web3');
 const {
     BlockchainInterface,
@@ -48,12 +47,12 @@ class Quorum extends BlockchainInterface {
         this.bcType = 'quorum';
         this.quorumConfig = require(configPath).quorum;
         this.clientIndex = workerIndex;
-        this.fromAddress = "";
-        this.fromAddressPassword = "";
-        this.privateFrom = "";
+        this.fromAddress = '';
+        this.fromAddressPassword = '';
+        this.privateFrom = '';
 
         // If Master or Worker1, use first node in networkConfig nodes array
-        if (this.clientIndex == -1 || workerIndex == 0) {
+        if (this.clientIndex === -1 || workerIndex === 0) {
             this.web3 = new Web3(
                 new Web3.providers.HttpProvider(this.quorumConfig.nodes[0].url)
             );
@@ -120,7 +119,7 @@ class Quorum extends BlockchainInterface {
 
             this.quorumConfig.contracts[key].abi = contractData.abi;
             promises.push(
-                new Promise(async function(resolve, reject) {
+                async function(resolve, reject) {
                     let contractInstance = null;
                     let status = 'PUBLIC';
                     try {
@@ -155,7 +154,7 @@ class Quorum extends BlockchainInterface {
                         logger.error(error);
                         reject(error);
                     }
-                })
+                }
             );
         }
         return Promise.all(promises);
