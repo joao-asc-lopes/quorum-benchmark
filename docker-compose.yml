@@ -175,6 +175,17 @@ x-filebeat-def:
     - ./logs/tessera/:/var/log/tessera/
 
 
+x-caliper-def:
+  &caliper-def
+  image: hyperledger/caliper:0.5.0
+  environment:
+    CALIPER_BIND_SUT: quorum
+    CALIPER_NETWORKCONFIG: caliper-config/network.yaml
+    CALIPER_BENCHCONFIG: caliper-config/scenarios/simple.yaml
+  depends_on:
+    - rpcnode
+  ports:
+    - 
 
 
 services:
