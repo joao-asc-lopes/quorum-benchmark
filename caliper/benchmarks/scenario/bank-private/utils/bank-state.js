@@ -19,7 +19,7 @@ const Dictionary = 'abcdefghijklmnopqrstuvwxyz';
 /**
  * Class for managing simple account states.
  */
-class SimpleState {
+class BankState {
 
     /**
      * Initializes the instance.
@@ -92,7 +92,7 @@ class SimpleState {
     }
 
     /**
-     * Get the arguments for transfering money between accounts.
+     * Get the arguments for transferring money between accounts.
      * @returns {object} The account arguments.
      */
     getTransferArguments() {
@@ -104,4 +104,4 @@ class SimpleState {
     }
 }
 
-module.exports = SimpleState;
+module.exports = BankState;

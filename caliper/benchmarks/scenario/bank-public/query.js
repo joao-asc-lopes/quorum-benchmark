@@ -15,7 +15,7 @@
 'use strict';
 
 const OperationBase = require('./utils/operation-base');
-const SimpleState = require('./utils/simple-state');
+const BankState = require('./utils/bank-state');
 
 /**
  * Workload module for querying various accounts.
@@ -31,18 +31,18 @@ class Query extends OperationBase {
 
     /**
      * Create a pre-configured state representation.
-     * @return {SimpleState} The state instance.
+     * @return {BankState} The state instance.
      */
-    createSimpleState() {
+    createBankState() {
         const accountsPerWorker = this.numberOfAccounts / this.totalWorkers;
-        return new SimpleState(this.workerIndex, this.initialMoney, this.moneyToTransfer, accountsPerWorker);
+        return new BankState(this.workerIndex, this.initialMoney, this.moneyToTransfer, accountsPerWorker);
     }
 
     /**
      * Assemble TXs for querying accounts.
      */
     async submitTransaction() {
-        const queryArgs = this.simpleState.getQueryArguments();
+        const queryArgs = this.bankState.getQueryArguments();
         await this.sutAdapter.sendRequests(this.createConnectorRequest('query', queryArgs));
     }
 }

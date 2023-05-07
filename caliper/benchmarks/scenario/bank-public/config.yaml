@@ -1,10 +1,10 @@
-simpleArgs: &simple-args
+bankArgs: &bank-args
   initialMoney: 10000
   moneyToTransfer: 100
-  numberOfAccounts: &number-of-accounts 1000
+  numberOfAccounts: &number-of-accounts 10000
 
 test:
-  name: simple
+  name: bank
   description: >-
     This is an example benchmark for Caliper, to test the backend DLT's
     performance with simple account opening & querying transactions.
@@ -19,29 +19,29 @@ test:
       rateControl:
         type: fixed-rate
         opts:
-          tps: 50
+          tps: 100
       workload:
-        module: benchmarks/scenario/simple/open.js
-        arguments: *simple-args
+        module: benchmarks/scenario/bank-public/open.js
+        arguments: *bank-args
     - label: query
       description: Test description for the query performance of the deployed contract.
       txNumber: *number-of-accounts
       rateControl:
         type: fixed-rate
         opts:
-          tps: 100
+          tps: 200
       workload:
-        module: benchmarks/scenario/simple/query.js
-        arguments: *simple-args
+        module: benchmarks/scenario/bank-public/query.js
+        arguments: *bank-args
     - label: transfer
-      description: Test description for transfering money between accounts.
-      txNumber: 50
+      description: Test description for transferring money between accounts.
+      txNumber: 1000
       rateControl:
         type: fixed-rate
         opts:
-          tps: 5
+          tps: 100
       workload:
-        module: benchmarks/scenario/simple/transfer.js
+        module: benchmarks/scenario/bank-public/transfer.js
         arguments:
-          << : *simple-args
+          << : *bank-args
           money: 100

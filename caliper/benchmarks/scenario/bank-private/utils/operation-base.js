@@ -16,8 +16,10 @@
 
 const { WorkloadModuleBase } = require('@hyperledger/caliper-core');
 
+const SupportedConnectors = ['ethereum', 'fabric', 'quorum'];
+
 /**
- * Base class for Smallbank operations.
+ * Base class for simple operations.
  */
 class OperationBase extends WorkloadModuleBase {
     /**
@@ -41,26 +43,23 @@ class OperationBase extends WorkloadModuleBase {
         await super.initializeWorkloadModule(workerIndex, totalWorkers, roundIndex, roundArguments, sutAdapter, sutContext);
 
         this.assertConnectorType();
-        this.assertSetting('accountsGenerated');
-        this.assertSetting('txnPerBatch');
+        this.assertSetting('initialMoney');
+        this.assertSetting('moneyToTransfer');
+        this.assertSetting('numberOfAccounts');
 
-        if(this.roundArguments.accountsGenerated <= 3) {
-            throw new Error('Smallbank workload error: module setting "accounts" must be greater than 3');
-        }
-
-        this.accounts = this.roundArguments.accountsGenerated;
-        this.txnPerBatch = this.roundArguments.txnPerBatch;
-        this.smallbank = this.createSmallbank();
-        this.smallbank.setAccountSuffix(this.workerIndex, this.totalWorkers);
+        this.initialMoney = this.roundArguments.initialMoney;
+        this.moneyToTransfer = this.roundArguments.moneyToTransfer;
+        this.numberOfAccounts = this.roundArguments.numberOfAccounts;
+        this.bankState = this.createBankState();
     }
 
     /**
      * Performs the operation mode-specific initialization.
-     * @return {Smallbank} the initialized Smallbank instance.
+     * @return {BankState} the initialized BankState instance.
      * @protected
      */
-    createSmallbank() {
-        throw new Error('Smallbank workload error: "createSmallbank" must be overridden in derived classes');
+    createBankState() {
+        throw new Error('Simple workload error: "createBankState" must be overridden in derived classes');
     }
 
     /**
@@ -69,7 +68,7 @@ class OperationBase extends WorkloadModuleBase {
      */
     assertConnectorType() {
         this.connectorType = this.sutAdapter.getType();
-        if (this.connectorType !== 'fabric') {
+        if (!SupportedConnectors.includes(this.connectorType)) {
             throw new Error(`Connector type ${this.connectorType} is not supported by the benchmark`);
         }
     }
@@ -81,7 +80,7 @@ class OperationBase extends WorkloadModuleBase {
      */
     assertSetting(settingName) {
         if(!this.roundArguments.hasOwnProperty(settingName)) {
-            throw new Error(`Smallbank workload error: module setting "${settingName}" is missing from the benchmark configuration file`);
+            throw new Error(`Simple workload error: module setting "${settingName}" is missing from the benchmark configuration file`);
         }
     }
 
@@ -96,6 +95,9 @@ class OperationBase extends WorkloadModuleBase {
         switch (this.connectorType) {
             case 'fabric':
                 return this._createFabricConnectorRequest(operation, args);
+            case 'ethereum':
+            case 'quorum':
+                return this._createEthereumConnectorRequest(operation, args);
             default:
                 // this shouldn't happen
                 throw new Error(`Connector type ${this.connectorType} is not supported by the benchmark`);
@@ -112,11 +114,27 @@ class OperationBase extends WorkloadModuleBase {
     _createFabricConnectorRequest(operation, args) {
         const query = operation === 'query';
         return {
-            contractId: 'smallbank',
+            contractId: 'bank',
             contractVersion: '1.0',
             contractFunction: operation,
             contractArguments: Object.keys(args).map(k => args[k].toString()),
-            timeout: query ? 3 : 30,
+            readOnly: query
+        };
+    }
+
+    /**
+     * Assemble a Ethereum-specific request from the business parameters.
+     * @param {string} operation The name of the operation to invoke.
+     * @param {object} args The object containing the arguments.
+     * @return {object} The Ethereum-specific request.
+     * @private
+     */
+    _createEthereumConnectorRequest(operation, args) {
+        const query = operation === 'query';
+        return {
+            contract: 'bank',
+            verb: operation,
+            args: Object.keys(args).map(k => args[k]),
             readOnly: query
         };
     }

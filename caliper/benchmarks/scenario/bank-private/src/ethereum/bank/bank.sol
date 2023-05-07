@@ -1,6 +1,6 @@
 pragma solidity >=0.4.22 <0.6.0;
 
-contract simple {
+contract bank {
     mapping(string => int) private accounts;
 
     function open(string memory acc_id, int amount) public {

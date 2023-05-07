@@ -1,5 +1,5 @@
 {
-    "name": "simple",
+    "name": "bank",
     "abi": [
         {
             "constant": false,

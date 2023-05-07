@@ -15,36 +15,34 @@
 'use strict';
 
 const OperationBase = require('./utils/operation-base');
-const Smallbank = require('./utils/smallbank');
+const BankState = require('./utils/bank-state');
 
 /**
- * Workload module for Smallbank queries.
+ * Workload module for initializing the SUT with various accounts.
  */
-class Query extends OperationBase {
+class Open extends OperationBase {
+
     /**
-     * Initializes the workload module instance.
+     * Initializes the parameters of the workload.
      */
     constructor() {
         super();
     }
 
     /**
-     * Creates a Smallbank instance initialized for the configured number of accounts.
-     * @return {Smallbank} The instance.
-     * @protected
+     * Create an empty state representation.
+     * @return {BankState} The state instance.
      */
-    createSmallbank() {
-        return new Smallbank(this.accounts);
+    createBankState() {
+        return new BankState(this.workerIndex, this.initialMoney, this.moneyToTransfer);
     }
 
     /**
-     * Assemble TXs for the round.
-     * @return {Promise<TxStatus[]>}
+     * Assemble TXs for opening new accounts.
      */
     async submitTransaction() {
-        const queryArgs = this.smallbank.getQueryArguments();
-        const request = this.createConnectorRequest('query', queryArgs);
-        await this.sutAdapter.sendRequests(request);
+        let createArgs = this.bankState.getOpenAccountArguments();
+        await this.sutAdapter.sendRequests(this.createConnectorRequest('open', createArgs));
     }
 }
 
@@ -53,7 +51,7 @@ class Query extends OperationBase {
  * @return {WorkloadModuleInterface}
  */
 function createWorkloadModule() {
-    return new Query();
+    return new Open();
 }
 
 module.exports.createWorkloadModule = createWorkloadModule;

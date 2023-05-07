@@ -12,39 +12,37 @@
 * limitations under the License.
 */
 
-
 'use strict';
 
 const OperationBase = require('./utils/operation-base');
-const SimpleState = require('./utils/simple-state');
+const BankState = require('./utils/bank-state');
 
 /**
- * Workload module for transferring money between accounts.
+ * Workload module for initializing the SUT with various accounts.
  */
-class Transfer extends OperationBase {
+class Open extends OperationBase {
 
     /**
-     * Initializes the instance.
+     * Initializes the parameters of the workload.
      */
     constructor() {
         super();
     }
 
     /**
-     * Create a pre-configured state representation.
-     * @return {SimpleState} The state instance.
+     * Create an empty state representation.
+     * @return {BankState} The state instance.
      */
-    createSimpleState() {
-        const accountsPerWorker = this.numberOfAccounts / this.totalWorkers;
-        return new SimpleState(this.workerIndex, this.initialMoney, this.moneyToTransfer, accountsPerWorker);
+    createBankState() {
+        return new BankState(this.workerIndex, this.initialMoney, this.moneyToTransfer);
     }
 
     /**
-     * Assemble TXs for transferring money.
+     * Assemble TXs for opening new accounts.
      */
     async submitTransaction() {
-        const transferArgs = this.simpleState.getTransferArguments();
-        await this.sutAdapter.sendRequests(this.createConnectorRequest('transfer', transferArgs));
+        let createArgs = this.bankState.getOpenAccountArguments();
+        await this.sutAdapter.sendRequests(this.createConnectorRequest('open', createArgs));
     }
 }
 
@@ -53,7 +51,7 @@ class Transfer extends OperationBase {
  * @return {WorkloadModuleInterface}
  */
 function createWorkloadModule() {
-    return new Transfer();
+    return new Open();
 }
 
 module.exports.createWorkloadModule = createWorkloadModule;

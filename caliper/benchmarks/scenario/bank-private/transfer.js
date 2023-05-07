@@ -12,39 +12,39 @@
 * limitations under the License.
 */
 
+
 'use strict';
 
 const OperationBase = require('./utils/operation-base');
-const Smallbank = require('./utils/smallbank');
+const BankState = require('./utils/bank-state');
 
 /**
- * Workload module for the benchmark round.
+ * Workload module for transferring money between accounts.
  */
-class Create extends OperationBase {
+class Transfer extends OperationBase {
+
     /**
-     * Initializes the workload module instance.
+     * Initializes the instance.
      */
     constructor() {
         super();
     }
 
     /**
-     * Create a Smallbank instance with no accounts.
-     * @return {Smallbank} The instance.
-     * @protected
+     * Create a pre-configured state representation.
+     * @return {BankState} The state instance.
      */
-    createSmallbank() {
-        return new Smallbank();
+    createBankState() {
+        const accountsPerWorker = this.numberOfAccounts / this.totalWorkers;
+        return new BankState(this.workerIndex, this.initialMoney, this.moneyToTransfer, accountsPerWorker);
     }
 
     /**
-     * Assemble TXs for the round.
-     * @return {Promise<TxStatus[]>}
+     * Assemble TXs for transferring money.
      */
     async submitTransaction() {
-        const createArgs = this.smallbank.getCreateAccountArguments();
-        const request = this.createConnectorRequest('create_account', createArgs);
-        await this.sutAdapter.sendRequests(request);
+        const transferArgs = this.bankState.getTransferArguments();
+        await this.sutAdapter.sendRequests(this.createConnectorRequest('transfer', transferArgs));
     }
 }
 
@@ -53,7 +53,7 @@ class Create extends OperationBase {
  * @return {WorkloadModuleInterface}
  */
 function createWorkloadModule() {
-    return new Create();
+    return new Transfer();
 }
 
 module.exports.createWorkloadModule = createWorkloadModule;

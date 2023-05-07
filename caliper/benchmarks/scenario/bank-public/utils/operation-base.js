@@ -16,7 +16,7 @@
 
 const { WorkloadModuleBase } = require('@hyperledger/caliper-core');
 
-const SupportedConnectors = ['ethereum', 'fabric'];
+const SupportedConnectors = ['ethereum', 'fabric', 'quorum'];
 
 /**
  * Base class for simple operations.
@@ -50,16 +50,16 @@ class OperationBase extends WorkloadModuleBase {
         this.initialMoney = this.roundArguments.initialMoney;
         this.moneyToTransfer = this.roundArguments.moneyToTransfer;
         this.numberOfAccounts = this.roundArguments.numberOfAccounts;
-        this.simpleState = this.createSimpleState();
+        this.bankState = this.createBankState();
     }
 
     /**
      * Performs the operation mode-specific initialization.
-     * @return {SimpleState} the initialized SimpleState instance.
+     * @return {BankState} the initialized BankState instance.
      * @protected
      */
-    createSimpleState() {
-        throw new Error('Simple workload error: "createSimpleState" must be overridden in derived classes');
+    createBankState() {
+        throw new Error('Simple workload error: "createBankState" must be overridden in derived classes');
     }
 
     /**
@@ -96,6 +96,7 @@ class OperationBase extends WorkloadModuleBase {
             case 'fabric':
                 return this._createFabricConnectorRequest(operation, args);
             case 'ethereum':
+            case 'quorum':
                 return this._createEthereumConnectorRequest(operation, args);
             default:
                 // this shouldn't happen
@@ -113,7 +114,7 @@ class OperationBase extends WorkloadModuleBase {
     _createFabricConnectorRequest(operation, args) {
         const query = operation === 'query';
         return {
-            contractId: 'simple',
+            contractId: 'bank',
             contractVersion: '1.0',
             contractFunction: operation,
             contractArguments: Object.keys(args).map(k => args[k].toString()),
@@ -131,7 +132,7 @@ class OperationBase extends WorkloadModuleBase {
     _createEthereumConnectorRequest(operation, args) {
         const query = operation === 'query';
         return {
-            contract: 'simple',
+            contract: 'bank',
             verb: operation,
             args: Object.keys(args).map(k => args[k]),
             readOnly: query
