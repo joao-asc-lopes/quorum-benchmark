@@ -14,7 +14,7 @@
 
 'use strict';
 
-const Dictionary = 'abcdefghijklmnopqrstuvwxyz';
+const Dictionary = 'abcdefghijklmnopqrstufweyuhfweuijfwefhjwepuifhweiufhweipufhweipufhwiofpwehdphvwxyz';
 
 /**
  * Class for managing simple account states.

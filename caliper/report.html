@@ -154,13 +154,13 @@
                     </tr>
 
                     <tr>
-                         <td>open</td> <td>10000</td> <td>0</td> <td>100.0</td> <td>7.72</td> <td>2.08</td> <td>4.67</td> <td>95.7</td>
+                         <td>open</td> <td>10000</td> <td>0</td> <td>20.0</td> <td>7.57</td> <td>2.08</td> <td>4.53</td> <td>19.8</td>
                     </tr>
                     <tr>
-                         <td>query</td> <td>10000</td> <td>0</td> <td>200.0</td> <td>0.02</td> <td>0.00</td> <td>0.00</td> <td>200.0</td>
+                         <td>query</td> <td>10000</td> <td>0</td> <td>20.0</td> <td>0.02</td> <td>0.00</td> <td>0.01</td> <td>20.0</td>
                     </tr>
                     <tr>
-                         <td>transfer</td> <td>1000</td> <td>0</td> <td>100.1</td> <td>7.36</td> <td>2.08</td> <td>4.71</td> <td>77.8</td>
+                         <td>transfer</td> <td>1000</td> <td>0</td> <td>20.1</td> <td>7.71</td> <td>1.98</td> <td>4.60</td> <td>18.9</td>
                     </tr>
                 </table>
             </div>
@@ -170,7 +170,7 @@
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
-    tps: 100
+    tps: 20
 </pre>
                         <h3>Performance metrics for open</h3>
                             <table style="min-width: 100%;">
@@ -178,7 +178,7 @@
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>open</td> <td>10000</td> <td>0</td> <td>100.0</td> <td>7.72</td> <td>2.08</td> <td>4.67</td> <td>95.7</td>
+                                     <td>open</td> <td>10000</td> <td>0</td> <td>20.0</td> <td>7.57</td> <td>2.08</td> <td>4.53</td> <td>19.8</td>
                                 </tr>
                             </table>
                         <h3>Resource utilization for open</h3>
@@ -190,7 +190,7 @@
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
-    tps: 200
+    tps: 20
 </pre>
                         <h3>Performance metrics for query</h3>
                             <table style="min-width: 100%;">
@@ -198,7 +198,7 @@
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>query</td> <td>10000</td> <td>0</td> <td>200.0</td> <td>0.02</td> <td>0.00</td> <td>0.00</td> <td>200.0</td>
+                                     <td>query</td> <td>10000</td> <td>0</td> <td>20.0</td> <td>0.02</td> <td>0.00</td> <td>0.01</td> <td>20.0</td>
                                 </tr>
                             </table>
                         <h3>Resource utilization for query</h3>
@@ -210,7 +210,7 @@
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
-    tps: 100
+    tps: 20
 </pre>
                         <h3>Performance metrics for transfer</h3>
                             <table style="min-width: 100%;">
@@ -218,7 +218,7 @@
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>transfer</td> <td>1000</td> <td>0</td> <td>100.1</td> <td>7.36</td> <td>2.08</td> <td>4.71</td> <td>77.8</td>
+                                     <td>transfer</td> <td>1000</td> <td>0</td> <td>20.1</td> <td>7.71</td> <td>1.98</td> <td>4.60</td> <td>18.9</td>
                                 </tr>
                             </table>
                         <h3>Resource utilization for transfer</h3>
@@ -232,7 +232,7 @@ description: &gt;-
   This is an example benchmark for Caliper, to test the backend DLT&#39;s
   performance with simple account opening &amp; querying transactions.
 workers:
-  number: 1
+  number: 4
 rounds:
   - label: open
     description: &gt;-
@@ -242,12 +242,12 @@ rounds:
     rateControl:
       type: fixed-rate
       opts:
-        tps: 100
+        tps: 20
     workload:
       module: benchmarks&#x2F;scenario&#x2F;bank-public&#x2F;open.js
       arguments:
         initialMoney: 10000
-        moneyToTransfer: 100
+        moneyToTransfer: 1000
         numberOfAccounts: 10000
   - label: query
     description: Test description for the query performance of the deployed contract.
@@ -255,12 +255,12 @@ rounds:
     rateControl:
       type: fixed-rate
       opts:
-        tps: 200
+        tps: 20
     workload:
       module: benchmarks&#x2F;scenario&#x2F;bank-public&#x2F;query.js
       arguments:
         initialMoney: 10000
-        moneyToTransfer: 100
+        moneyToTransfer: 1000
         numberOfAccounts: 10000
   - label: transfer
     description: Test description for transferring money between accounts.
@@ -268,12 +268,12 @@ rounds:
     rateControl:
       type: fixed-rate
       opts:
-        tps: 100
+        tps: 20
     workload:
       module: benchmarks&#x2F;scenario&#x2F;bank-public&#x2F;transfer.js
       arguments:
         initialMoney: 10000
-        moneyToTransfer: 100
+        moneyToTransfer: 1000
         numberOfAccounts: 10000
         money: 100
 </pre>
