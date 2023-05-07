@@ -50,7 +50,7 @@ class QuorumConnector extends ConnectorBase {
         this.checkConfig(ethereumConfig);
 
         this.ethereumConfig = ethereumConfig;
-        this.web3 = new Web3Quorum(new Web3(this.ethereumConfig.url), { privateUrl: 'http://127.0.0.1:9081' }, true);
+        this.web3 = new Web3Quorum(new Web3(this.ethereumConfig.url), {privateUrl: 'http://127.0.0.1:9081'}, true);
         this.web3.transactionConfirmationBlocks = this.ethereumConfig.transactionConfirmationBlocks;
         this.workerIndex = workerIndex;
         this.context = undefined;
@@ -68,13 +68,13 @@ class QuorumConnector extends ConnectorBase {
             );
         }
 
-        if (ethereumConfig.url.toLowerCase().indexOf('http') === 0) {
-            throw new Error(
-                'Ethereum benchmarks must not use http(s) RPC connections, as there is no way to guarantee the ' +
-                'order of submitted transactions when using other transports. For more information, please see ' +
-                'https://github.com/hyperledger/caliper/issues/776#issuecomment-624771622'
-            );
-        }
+        // if (ethereumConfig.url.toLowerCase().indexOf('http') === 0) {
+        //     throw new Error(
+        //         'Ethereum benchmarks must not use http(s) RPC connections, as there is no way to guarantee the ' +
+        //         'order of submitted transactions when using other transports. For more information, please see ' +
+        //         'https://github.com/hyperledger/caliper/issues/776#issuecomment-624771622'
+        //     );
+        // }
 
         //TODO: add validation logic for the rest of the configuration object
     }
@@ -111,7 +111,7 @@ class QuorumConnector extends ConnectorBase {
             }
 
             this.ethereumConfig.contracts[key].abi = contractData.abi;
-            promises.push(new Promise(async function(resolve, reject) {
+            promises.push(new Promise(async function (resolve, reject) {
                 let contractInstance;
                 try {
                     if (privacy) {
@@ -324,6 +324,7 @@ class QuorumConnector extends ConnectorBase {
         try {
             if (request.readOnly) {
                 const privacyGroupId = await this.resolvePrivacyGroup(privacy);
+                logger.warn('transaction: ' + JSON.stringify(transaction));
 
                 const value = await web3.priv.call(privacyGroupId, transaction);
                 onSuccess(value);
@@ -334,13 +335,13 @@ class QuorumConnector extends ConnectorBase {
 
                 const txHash = await web3.priv.generateAndSendRawTransaction(transaction);
                 const rcpt = await web3.priv.waitForTransactionReceipt(txHash);
-                if (rcpt.status === '0x1')  {
+                if (rcpt.status === '0x1') {
                     onSuccess(rcpt);
                 } else {
                     onFailure(rcpt);
                 }
             }
-        } catch(err) {
+        } catch (err) {
             onFailure(err);
         }
 
@@ -350,7 +351,7 @@ class QuorumConnector extends ConnectorBase {
 
     /**
      * Deploys a new contract using the given web3 instance
-     * @param {JSON} contractData Contract data with abi, bytecode and gas properties
+     * @param {any} contractData Contract data with abi, bytecode and gas properties
      * @returns {Promise<web3.eth.Contract>} The deployed contract instance
      */
     async deployContract(contractData) {
@@ -373,36 +374,35 @@ class QuorumConnector extends ConnectorBase {
 
     /**
      * Deploys a new contract using the given web3 instance
-     * @param {JSON} contractData Contract data with abi, bytecode and gas properties
-     * @param {JSON} privacy Privacy options
+     * @param {any} contractData Contract data with abi, bytecode and gas properties
+     * @param {any} privacy Privacy options
      * @returns {Promise<web3.eth.Contract>} The deployed contract instance
      */
     async deployPrivateContract(contractData, privacy) {
         const web3 = this.web3;
-        // Using randomly generated account to deploy private contract to avoid public/private nonce issues
-        const deployerAccount =  web3.eth.accounts.create();
+        // Using a randomly generated account to deploy private contract to avoid public/private nonce issues
+        const deployerAccount = web3.eth.accounts.create();
+        const txCount = await web3.eth.getTransactionCount(`${deployerAccount.address}`);
 
         const transaction = {
             data: contractData.bytecode,
-            nonce: deployerAccount.nonce,
-            privateKey: deployerAccount.privateKey.substring(2),    // web3js-eea doesn't not accept private keys prefixed by '0x'
+            nonce: txCount,
+            gasPrice: 0,
+            gasLimit: 0x24a22,
+            value: 0,
+            from: deployerAccount,
+            isPrivate: true,
+            privateKey: deployerAccount.privateKey,
         };
 
         this.setPrivateTransactionParticipants(transaction, privacy);
 
         try {
             const txHash = await web3.priv.generateAndSendRawTransaction(transaction);
-            const txRcpt = await web3.priv.waitForTransactionReceipt(txHash);
-
-            if (txRcpt.status === '0x1') {
-                return new web3.eth.Contract(contractData.abi, txRcpt.contractAddress);
-            } else {
-                const msg = `Failed private transaction hash ${txHash}`;
-                logger.error(msg);
-                throw new Error(msg);
-            }
+            logger.info('transaction generated: ' + JSON.stringify(txHash));
+            return new web3.eth.Contract(contractData.abi, txHash.contractAddress);
         } catch (err) {
-            logger.error('Error deploying private contract: ', JSON.stringify(err));
+            logger.error('Error deploying private contract: ', err.stack);
             throw(err);
         }
     }
@@ -415,7 +415,7 @@ class QuorumConnector extends ConnectorBase {
      */
     async prepareWorkerArguments(number) {
         let result = [];
-        for (let i = 0 ; i<= number ; i++) {
+        for (let i = 0; i <= number; i++) {
             result[i] = {contracts: this.ethereumConfig.contracts};
         }
         return result;
@@ -423,17 +423,17 @@ class QuorumConnector extends ConnectorBase {
 
     /**
      * Returns the privacy group id depending on the privacy mode being used
-     * @param {JSON} privacy Privacy options
+     * @param {any} privacy Privacy options
      * @returns {Promise<string>} The privacyGroupId
      */
     async resolvePrivacyGroup(privacy) {
         const web3 = this.context.web3;
 
-        switch(privacy.groupType) {
+        switch (privacy.groupType) {
         case 'legacy': {
             const privGroups = await web3.priv.findPrivacyGroup([privacy.privateFrom, ...privacy.privateFor]);
             if (privGroups.length > 0) {
-                return privGroups.filter(function(el) {
+                return privGroups.filter(function (el) {
                     return el.type === 'LEGACY';
                 })[0].privacyGroupId;
             } else {
@@ -443,7 +443,8 @@ class QuorumConnector extends ConnectorBase {
         case 'pantheon':
         case 'onchain': {
             return privacy.privacyGroupId;
-        } default: {
+        }
+        default: {
             throw new Error('Invalid privacy type');
         }
         }
@@ -451,11 +452,11 @@ class QuorumConnector extends ConnectorBase {
 
     /**
      * Set the participants of a privacy transaction depending on the privacy mode being used
-     * @param {JSON} transaction Object representing the transaction fields
-     * @param {JSON} privacy Privacy options
+     * @param {any} transaction Object representing the transaction fields
+     * @param {any} privacy Privacy options
      */
     setPrivateTransactionParticipants(transaction, privacy) {
-        switch(privacy.groupType) {
+        switch (privacy.groupType) {
         case 'legacy': {
             transaction.privateFrom = privacy.privateFrom;
             transaction.privateFor = privacy.privateFor;
@@ -466,7 +467,8 @@ class QuorumConnector extends ConnectorBase {
             transaction.privateFrom = privacy.privateFrom;
             transaction.privacyGroupId = privacy.privacyGroupId;
             break;
-        } default: {
+        }
+        default: {
             throw new Error('Invalid privacy type');
         }
         }

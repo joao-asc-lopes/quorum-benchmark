@@ -51,6 +51,8 @@ class OperationBase extends WorkloadModuleBase {
         this.moneyToTransfer = this.roundArguments.moneyToTransfer;
         this.numberOfAccounts = this.roundArguments.numberOfAccounts;
         this.bankState = this.createBankState();
+        this.sutContext = sutContext;
+        this.roundArguments = roundArguments;
     }
 
     /**
@@ -135,7 +137,15 @@ class OperationBase extends WorkloadModuleBase {
             contract: 'bank',
             verb: operation,
             args: Object.keys(args).map(k => args[k]),
-            readOnly: query
+            readOnly: query,
+            privacy: {
+                ...this.sutContext.privacy['group'],
+                id: 'group',
+                sender: {
+                    ...this.sutContext.web3.eth.accounts.create(),
+                    nonce: 0
+                }
+            }
         };
     }
 }

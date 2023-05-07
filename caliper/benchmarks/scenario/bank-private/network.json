@@ -4,16 +4,16 @@
         "command": {}
     },
     "ethereum": {
-        "url": "ws://localhost:8546",
-        "contractDeployerAddress": "0xc9c913c8c3c1cd416d80a0abf475db2062f161f6",
-        "contractDeployerAddressPrivateKey": "0x60bbe10a196a4e71451c0f6e9ec9beab454c2a5ac0542aa5b8b733ff5719fec3",
+        "url": "http://127.0.0.1:20000",
+        "contractDeployerAddress": "0xf0e2db6c8dc6c681bb5d6ad121a107f300e9b2b5",
+        "contractDeployerAddressPrivateKey": "0x8bbbb1b345af56b560a5b20bd4b0ed1cd8cc9958a16262bc75118453cb546df7",
         "fromAddressSeed": "0x3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580",
         "transactionConfirmationBlocks": 24,
         "privacy":  {
-            "group1": {
-                "groupType": "onchain",
-                "privateFrom": "GGilEkXLaQ9yhhtbpBT03Me9iYa7U/mWXxrJhnbl1XY=",
-                "privacyGroupId": "cskJg3WXZxU9kII4Tu42cZ6OmaB0ykldWsymFDhiTSQ="
+            "group": {
+                "groupType": "legacy",
+                "privateFrom": "BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo=",
+                "privateFor": ["BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo=", "QfeDAys9MPDs2XHExtc84jKGHxZg/aj52DTh0vtA3Xc=", "1iTZde/ndBHvzhcl7V68x44Vx7pl8nwx9LqnM/AfJUg="]
             }
         },
         "contracts": {
@@ -23,7 +23,8 @@
                     "open": 45000,
                     "query": 100000,
                     "transfer": 70000
-                }
+                },
+                "private": "group"
             }
         }
     }

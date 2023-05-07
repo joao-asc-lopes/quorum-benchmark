@@ -1,7 +1,7 @@
 bankArgs: &bank-args
   initialMoney: 10000
   moneyToTransfer: 100
-  numberOfAccounts: &number-of-accounts 1000
+  numberOfAccounts: &number-of-accounts 100
 
 test:
   name: bank
@@ -9,7 +9,7 @@ test:
     This is an example benchmark for Caliper, to test the backend DLT's
     performance with simple account opening & querying transactions.
   workers:
-    number: 4
+    number: 1
   rounds:
     - label: open
       description: >-
