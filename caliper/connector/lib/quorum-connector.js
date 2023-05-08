@@ -318,28 +318,24 @@ class QuorumConnector extends ConnectorBase {
 
         const transaction = {
             to: contractInfo.contract._address,
-            data: payload
+            data: payload,
+            gasPrice: 0,
+            gasLimit: 0x24a22,
+            value: 0,
+            isPrivate: true,
+            nonce: sender.nonce,
+            privateKey: sender.privateKey,
+            from: sender,
+            privateFrom: privacy.privateFrom,
+            privateFor: privacy.privateFor
         };
 
         try {
-            if (request.readOnly) {
-                const privacyGroupId = await this.resolvePrivacyGroup(privacy);
-                logger.warn('transaction: ' + JSON.stringify(transaction));
-
-                const value = await web3.priv.call(privacyGroupId, transaction);
-                onSuccess(value);
+            const result = await web3.priv.generateAndSendRawTransaction(transaction);
+            if (result.status) {
+                onSuccess(result);
             } else {
-                transaction.nonce = sender.nonce;
-                transaction.privateKey = sender.privateKey.substring(2);
-                this.setPrivateTransactionParticipants(transaction, privacy);
-
-                const txHash = await web3.priv.generateAndSendRawTransaction(transaction);
-                const rcpt = await web3.priv.waitForTransactionReceipt(txHash);
-                if (rcpt.status === '0x1') {
-                    onSuccess(rcpt);
-                } else {
-                    onFailure(rcpt);
-                }
+                onFailure(result);
             }
         } catch (err) {
             onFailure(err);
@@ -393,13 +389,12 @@ class QuorumConnector extends ConnectorBase {
             from: deployerAccount,
             isPrivate: true,
             privateKey: deployerAccount.privateKey,
+            privateFrom: privacy.privateFrom,
+            privateFor: privacy.privateFor
         };
-
-        this.setPrivateTransactionParticipants(transaction, privacy);
 
         try {
             const txHash = await web3.priv.generateAndSendRawTransaction(transaction);
-            logger.info('transaction generated: ' + JSON.stringify(txHash));
             return new web3.eth.Contract(contractData.abi, txHash.contractAddress);
         } catch (err) {
             logger.error('Error deploying private contract: ', err.stack);
@@ -419,59 +414,6 @@ class QuorumConnector extends ConnectorBase {
             result[i] = {contracts: this.ethereumConfig.contracts};
         }
         return result;
-    }
-
-    /**
-     * Returns the privacy group id depending on the privacy mode being used
-     * @param {any} privacy Privacy options
-     * @returns {Promise<string>} The privacyGroupId
-     */
-    async resolvePrivacyGroup(privacy) {
-        const web3 = this.context.web3;
-
-        switch (privacy.groupType) {
-        case 'legacy': {
-            const privGroups = await web3.priv.findPrivacyGroup([privacy.privateFrom, ...privacy.privateFor]);
-            if (privGroups.length > 0) {
-                return privGroups.filter(function (el) {
-                    return el.type === 'LEGACY';
-                })[0].privacyGroupId;
-            } else {
-                throw new Error('There are multiple legacy privacy groups with same members. Can\'t resolve privacyGroupId.');
-            }
-        }
-        case 'pantheon':
-        case 'onchain': {
-            return privacy.privacyGroupId;
-        }
-        default: {
-            throw new Error('Invalid privacy type');
-        }
-        }
-    }
-
-    /**
-     * Set the participants of a privacy transaction depending on the privacy mode being used
-     * @param {any} transaction Object representing the transaction fields
-     * @param {any} privacy Privacy options
-     */
-    setPrivateTransactionParticipants(transaction, privacy) {
-        switch (privacy.groupType) {
-        case 'legacy': {
-            transaction.privateFrom = privacy.privateFrom;
-            transaction.privateFor = privacy.privateFor;
-            break;
-        }
-        case 'pantheon':
-        case 'onchain': {
-            transaction.privateFrom = privacy.privateFrom;
-            transaction.privacyGroupId = privacy.privacyGroupId;
-            break;
-        }
-        default: {
-            throw new Error('Invalid privacy type');
-        }
-        }
     }
 }
 
