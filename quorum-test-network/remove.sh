@@ -42,7 +42,7 @@ if [[ ! -z `docker ps -a | grep quorum-dev-quickstart_pet_shop` ]]; then
   removeDockerImage quorum-dev-quickstart_pet_shop
 fi
 
-if grep -q 'kibana:' docker-compose.yml 2> /dev/null ; then
+if grep -q 'kibana:' docker-compose.common.yml 2> /dev/null ; then
   docker image rm quorum-test-network_elasticsearch
   docker image rm quorum-test-network_logstash
   docker image rm quorum-test-network_filebeat
