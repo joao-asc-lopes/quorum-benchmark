@@ -16,9 +16,9 @@ geth --nousb --verbosity 1 --datadir=/data init ${GENESIS_FILE};
 cp /config/keys/accountKeystore /data/keystore/key;
 cp /config/keys/nodekey /data/geth/nodekey;
 
-if [ "istanbul" == "$GOQUORUM_CONS_ALGO" ];
+if [ "ibft" == "$GOQUORUM_CONS_ALGO" ];
 then
-    echo "Using istanbul for consensus algorithm..."
+    echo "Using ibft for consensus algorithm..."
     export CONSENSUS_ARGS="--istanbul.blockperiod 5 --mine --miner.threads 1 --miner.gasprice 0 --emitcheckpoints"
     export QUORUM_API="istanbul"
 elif [ "qbft" == "$GOQUORUM_CONS_ALGO" ];

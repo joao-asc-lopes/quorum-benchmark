@@ -8,8 +8,8 @@ RUN if [ -e /sbin/apk ] ; then apk add gettext --no-cache ; else apt-get update 
 
 ENV JAVA_OPTS="-Dlogback.configurationFile=/data/logback.xml"
 
-COPY docker-entrypoint.sh /usr/bin/
-COPY data data
+COPY common/config/tessera/docker-entrypoint.sh /usr/bin/
+COPY common/config/tessera/data data
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

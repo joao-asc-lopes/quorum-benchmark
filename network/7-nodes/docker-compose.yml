@@ -5,7 +5,8 @@ x-quorum-def:
   &quorum-def
   restart: "on-failure"
   build:
-    context: common/config/goquorum
+    context: .
+    dockerfile: common/config/goquorum/Dockerfile
     args:
       QUORUM_VERSION: ${QUORUM_VERSION:-latest}
       GOQUORUM_CONS_ALGO: ${GOQUORUM_CONS_ALGO}
@@ -24,7 +25,8 @@ x-quorum-def:
 x-tessera-def:
   &tessera-def
   build:
-    context: common/config/tessera
+    context: .
+    dockerfile: common/config/tessera/Dockerfile
     args:
       TESSERA_VERSION: ${TESSERA_VERSION:-latest}
   environment:
@@ -42,6 +44,36 @@ x-tessera-def:
     start_period: 5s
 
 services:
+  explorer:
+    image: consensys/quorum-explorer:${QUORUM_EXPLORER_VERSION:-latest}
+    volumes:
+      - ./${NODES_NUMBER}-nodes/quorum-explorer/config.json:/app/config.json
+      - ./${NODES_NUMBER}-nodes/quorum-explorer/env:/app/.env.production
+    depends_on:
+      - rpcnode
+    ports:
+      - 25000:25000/tcp
+    networks:
+      quorum-dev-quickstart:
+        ipv4_address: 172.16.239.31
+
+  rpcnode:
+    <<: *quorum-def
+    container_name: rpcnode
+    ports:
+      - 8545:8545/tcp
+      - 8546:8546/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+    volumes:
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/rpcnode:/config/keys
+      - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
+    networks:
+      quorum-dev-quickstart:
+        ipv4_address: 172.16.239.32
+
   validator0:
     << : *quorum-def
     ports:
@@ -51,7 +83,7 @@ services:
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/validator0:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator0:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
@@ -66,7 +98,7 @@ services:
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/validator1:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator1:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
@@ -81,7 +113,7 @@ services:
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/validator2:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator2:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
@@ -96,7 +128,7 @@ services:
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/validator3:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator3:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
@@ -107,7 +139,7 @@ services:
     ports:
       - 9081:9080
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member0:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member0:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
       quorum-dev-quickstart:
@@ -124,20 +156,20 @@ services:
       - member0tessera
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
-      - QUORUM_PTM=member1tessera
+      - QUORUM_PTM=member0tessera
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member0:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member0:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
-        ipv4_address: 172.16.239.16
+        ipv4_address: 172.16.239.15
 
   member1tessera:
     << : *tessera-def
     ports:
       - 9082:9080
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member1:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member1:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
       quorum-dev-quickstart:
@@ -154,20 +186,20 @@ services:
       - member1tessera
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
-      - QUORUM_PTM=member2tessera
+      - QUORUM_PTM=member1tessera
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member1:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member1:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
       quorum-dev-quickstart:
-        ipv4_address: 172.16.239.17
+        ipv4_address: 172.16.239.16
 
   member2tessera:
     << : *tessera-def
     ports:
       - 9083:9080
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member2:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member2:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
       quorum-dev-quickstart:
@@ -184,10 +216,10 @@ services:
       - member2tessera
     environment:
       - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
-      - QUORUM_PTM=member3tessera
+      - QUORUM_PTM=member2tessera
     volumes:
-      - ./${GOQUORUM_CONS_ALGO}/member2:/config/keys
+      - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member2:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
       quorum-dev-quickstart:
-        ipv4_address: 172.16.239.18
+        ipv4_address: 172.16.239.17

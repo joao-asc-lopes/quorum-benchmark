@@ -2,7 +2,7 @@
   "nonce": "0x0",
   "timestamp": "0x58ee40ba",
   "extraData": "0xf87aa00000000000000000000000000000000000000000000000000000000000000000f85494304ae29463dd94f540d9a1828f0a83b5704bb25d94bd5be9674a9aa5c178a0b0390760e27e7cb70354941ece41568a66ef28106e1a75f0902601c9da4eab942d940e3a9586c1b3a33ba7932fc3b2d7ae17a04cc080c0",
-  "gasLimit": "0xffff",
+  "gasLimit": "0xf7b760",
   "gasUsed": "0x0",
   "number": "0x0",
   "difficulty": "0x1",
@@ -35,7 +35,6 @@
       "policy": 0,
       "epoch": 30000,
       "ceil2Nby3Block": 0,
-      "testQBFTBlock": 0,
       "blockperiodseconds": 5,
       "emptyblockperiodseconds": 60,
       "requesttimeoutseconds": 10
@@ -49,6 +48,9 @@
       "balance": "1000000000000000000000000000"
     },
     "0xe8a99d891a16b3aa867bffbcd96a104c58b21915": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xc9c913c8c3c1cd416d80a0abf475db2062f161f6": {
       "balance": "1000000000000000000000000000"
     },
     "0xa97daab835f0287ca4d53d4983e3e3172794d852": {

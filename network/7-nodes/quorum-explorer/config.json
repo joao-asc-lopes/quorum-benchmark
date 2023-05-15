@@ -1,0 +1,60 @@
+{
+  "algorithm": "qbft",
+  "nodes": [
+    {
+      "name": "rpcnode",
+      "client": "goquorum",
+      "rpcUrl": "http://rpcnode:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator0",
+      "client": "goquorum",
+      "rpcUrl": "http://validator0:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator1",
+      "client": "goquorum",
+      "rpcUrl": "http://validator1:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator2",
+      "client": "goquorum",
+      "rpcUrl": "http://validator2:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator3",
+      "client": "goquorum",
+      "rpcUrl": "http://validator3:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "member0",
+      "client": "goquorum",
+      "rpcUrl": "http://member0quorum:8545",
+      "privateTxUrl": "http://member0tessera:9080",
+      "privateKey": "0xc3aebc91cefd0715b342c284e379e468b87e62d650d6709681236b31d98ebf8f",
+      "accountAddress": "0x144333ec686ce5442063a8c6c9981da6ce84a0d8"
+    },
+    {
+      "name": "member1",
+      "client": "goquorum",
+      "rpcUrl": "http://member1quorum:8545",
+      "privateTxUrl": "http://member1tessera:9080",
+      "privateKey": "0x71764c4a37af712c2a660fe7018137871dd90cfab1079d6c6a18575c90494917",
+      "accountAddress": "0xe864e3a0ef800ba64e36256e2dc24870dbbd75c2"
+    },
+    {
+      "name": "member2",
+      "client": "goquorum",
+      "rpcUrl": "http://member2quorum:8545",
+      "privateTxUrl": "http://member2tessera:9080",
+      "privateKey": "0x562a36b59571d15f6c7b4c32f29712bbf26ab7c9157e004939ef42b441b999b1",
+      "accountAddress": "0xe8a99d891a16b3aa867bffbcd96a104c58b21915"
+    }
+  ]
+}
+ 

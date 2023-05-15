@@ -12,8 +12,8 @@
         "privacy":  {
             "group": {
                 "groupType": "legacy",
-                "privateFrom": "BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo=",
-                "privateFor": ["BULeR8JyUWhiuuCMU/HLA0Q5pzkYT+cHII3ZKBey3Bo=", "QfeDAys9MPDs2XHExtc84jKGHxZg/aj52DTh0vtA3Xc=", "1iTZde/ndBHvzhcl7V68x44Vx7pl8nwx9LqnM/AfJUg="]
+                "privateFrom": "TzCaxyz4IdSYn/in8LVTrTBHCfK/IaeLxVQo84O1Ciw=",
+                "privateFor": ["TzCaxyz4IdSYn/in8LVTrTBHCfK/IaeLxVQo84O1Ciw=", "QfeDAys9MPDs2XHExtc84jKGHxZg/aj52DTh0vtA3Xc=", "1iTZde/ndBHvzhcl7V68x44Vx7pl8nwx9LqnM/AfJUg="]
             }
         },
         "contracts": {

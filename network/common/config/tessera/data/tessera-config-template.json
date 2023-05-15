@@ -35,21 +35,21 @@
     ],
     "peer": [
         {
+            "url": "http://member0tessera:9000"
+        },
+        {
             "url": "http://member1tessera:9000"
         },
         {
             "url": "http://member2tessera:9000"
-        },
-        {
-            "url": "http://member3tessera:9000"
         }
     ],
     "keys": {
         "passwords": [],
         "keyData": [
             {
-                "privateKeyPath": "/config/keys/tm.key",
-                "publicKeyPath": "/config/keys/tm.pub"
+                "privateKeyPath": "/config/keys/tessera.key",
+                "publicKeyPath": "/config/keys/tessera.pub"
             }
         ]
     },
