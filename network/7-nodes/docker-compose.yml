@@ -72,7 +72,7 @@ services:
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
       quorum-dev-quickstart:
-        ipv4_address: 172.16.239.32
+        ipv4_address: 172.16.239.38
 
   validator0:
     << : *quorum-def

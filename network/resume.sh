@@ -22,11 +22,6 @@ echo "*************************************${normal}"
 echo "Resuming network..."
 echo "----------------------------------"
 
-if [ -f "docker-compose-deps.yml" ]; then
-    echo "Starting dependencies..."
-    docker compose -f docker-compose-deps.yml start
-    sleep 60
-fi
 
-docker compose start
+docker compose -f docker-compose.common.yml -f "${NODES_NUMBER}-nodes/docker-compose.yml" start
 
