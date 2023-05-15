@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "launch-bank-public": "npx caliper launch manager --caliper-workspace . --caliper-benchconfig benchmarks/scenario/bank-public/config.yaml --caliper-networkconfig benchmarks/scenario/bank-public/network.json",
-    "launch-bank-private": "npx caliper launch manager --caliper-workspace . --caliper-benchconfig benchmarks/scenario/bank-private/config.yaml --caliper-networkconfig benchmarks/scenario/bank-private/network.json"
+    "launch-bank-public-7-nodes": "npx caliper launch manager --caliper-workspace . --caliper-benchconfig benchmarks/scenario/bank-public/config.yaml --caliper-networkconfig benchmarks/scenario/bank-public/network-7nodes.json",
+    "launch-bank-private-7-nodes": "npx caliper launch manager --caliper-workspace . --caliper-benchconfig benchmarks/scenario/bank-private/config.yaml --caliper-networkconfig benchmarks/scenario/bank-private/network-7nodes.json"
   },
   "author": "",
   "license": "ISC",
