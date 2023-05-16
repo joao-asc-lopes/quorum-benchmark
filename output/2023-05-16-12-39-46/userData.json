@@ -1,0 +1,20 @@
+{
+  "consensus": "clique",
+  "chainID": 1337,
+  "blockperiod": 10,
+  "requestTimeout": 10,
+  "epochLength": 30000,
+  "difficulty": 1,
+  "gasLimit": "0xf7b760",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "maxCodeSize": 64,
+  "txnSizeLimit": 64,
+  "bootnodes": 0,
+  "validators": 8,
+  "members": 6,
+  "tesseraEnabled": true,
+  "tesseraPassword": "",
+  "accountPassword": "",
+  "quickstartDevAccounts": false,
+  "outputPath": "./output"
+}

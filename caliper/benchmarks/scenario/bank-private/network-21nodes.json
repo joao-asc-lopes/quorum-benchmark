@@ -5,8 +5,8 @@
     },
     "ethereum": {
         "url": "http://127.0.0.1:20000",
-        "contractDeployerAddress": "0xf0e2db6c8dc6c681bb5d6ad121a107f300e9b2b5",
-        "contractDeployerAddressPrivateKey": "0x8bbbb1b345af56b560a5b20bd4b0ed1cd8cc9958a16262bc75118453cb546df7",
+        "contractDeployerAddress": "0x144333ec686ce5442063a8c6c9981da6ce84a0d8",
+        "contractDeployerAddressPrivateKey": "0xc3aebc91cefd0715b342c284e379e468b87e62d650d6709681236b31d98ebf8f",
         "fromAddressSeed": "0x3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580",
         "transactionConfirmationBlocks": 24,
         "privacy":  {
