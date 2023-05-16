@@ -1,0 +1,89 @@
+{
+  "nonce": "0x0",
+  "timestamp": "0x58ee40ba",
+  "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000f8acf8a89427edb967c57fba428b1507393ac2343e48a1be3794745a8fb25589f5bd7cd662fdaf41402a097e63d3949e2e047fd03df430fa9d0c187f18cb6ea777ff3d94caa6166732ff9cd65ad875e15aa5537c83a16a68941a5a1890f9879105c687ce664c4f8a01aa22fe909431e2dec20b62acda7e269ae1d9e7be607b1abfe694014b6e6ab668acd525fb3666eeb91351b55379c394e728477e9b56532eead03701130f2fa1e8e7aa2180c0",
+  "gasLimit": "0xf7b760",
+  "gasUsed": "0x0",
+  "number": "0x0",
+  "difficulty": "0x1",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "config": {
+    "chainId": 1337,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirglacierblock": 0,
+    "berlinBlock": 0,
+    "londonBlock": 0,
+    "isQuorum": true,
+    "maxCodeSizeConfig": [
+      {
+        "block": 0,
+        "size": 64
+      }
+    ],
+    "txnSizeLimit": 64,
+    "ibft": {
+      "policy": 0,
+      "epoch": 30000,
+      "ceil2Nby3Block": 0,
+      "blockperiodseconds": 5,
+      "requesttimeoutseconds": 10
+    }
+  },
+  "alloc": {
+    "0x144333ec686ce5442063a8c6c9981da6ce84a0d8": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xe864e3a0ef800ba64e36256e2dc24870dbbd75c2": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xe8a99d891a16b3aa867bffbcd96a104c58b21915": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xb1cc91b6ea6b42447977b9b3fe31dd373318654b": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xa22562791738f3e56cf7f502d94c6ef3284acedc": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x0a4558099000ddd09bdce31ce5810af33c77dfc7": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xc9c913c8c3c1cd416d80a0abf475db2062f161f6": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x4c7549f1d464f285ec4a92a7bae7c9f484878d42": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x89a1c97c193c17f3ce85047de72a3f09358a1e11": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x394c4bd1599e785bc9b873596d4568aedec1cd52": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x0822f5577b986362c8cdc7d29180a8eac5f4435a": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x9b9199ff55af72d249d81f9b334fda1fd77550ac": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x0dff3453ee2f999873b08e5dc853239ab2359e77": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x89fae42535364d2fc89c53cca3fcc75182881783": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x08d07c446714ad724d3f57dd1898b23dc948e8c0": {
+      "balance": "1000000000000000000000000000"
+    }
+  }
+}
