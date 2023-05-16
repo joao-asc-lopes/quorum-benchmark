@@ -34,7 +34,7 @@ then
 elif [ "clique" == "$GOQUORUM_CONS_ALGO" ];
 then
     echo "Using clique for consensus algorithm..."
-    export CONSENSUS_ARGS=""
+    export CONSENSUS_ARGS="--mine --miner.threads 1 --emitcheckpoints"
     export QUORUM_API="clique"
 fi
 
