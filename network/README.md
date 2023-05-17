@@ -1,6 +1,6 @@
 # Quorum Dev Quickstart
 
-Please go to our [official docs](https://consensys.net/docs/goquorum/en/latest/tutorials/quorum-dev-quickstart/)
+Please go to our [official docs](https://consensys.net/docs/goquorum/en/latest/tutorials/quorum-benchmark/)
 
 
 ## Moving to production

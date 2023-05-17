@@ -54,7 +54,7 @@ services:
     ports:
       - 25000:25000/tcp
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.31
 
   rpcnode:
@@ -71,7 +71,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/rpcnode:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.38
 
   validator0:
@@ -85,7 +85,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator0:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.11
 
   validator1:
@@ -99,7 +99,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator1:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.12
 
   validator2:
@@ -113,7 +113,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator2:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.13
 
   validator3:
@@ -127,7 +127,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator3:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.14
 
   validator4:
@@ -141,7 +141,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator4:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.15
 
   validator5:
@@ -155,7 +155,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator5:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.16
 
   validator6:
@@ -169,7 +169,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator6:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.17
 
   validator7:
@@ -183,7 +183,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/validator7:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.18
 
   member0tessera:
@@ -194,7 +194,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member0:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.21
 
   member0quorum:
@@ -213,7 +213,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member0:/config/keys
       - ./logs/quorum:/var/log/quorum/${GOQUORUM_CONS_ALGO}/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.19
 
   member1tessera:
@@ -224,7 +224,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member1:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.22
 
   member1quorum:
@@ -241,7 +241,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member1:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.40
 
   member2tessera:
@@ -252,7 +252,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member2:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.23
 
   member2quorum:
@@ -269,7 +269,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member2:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.41
 
   member3tessera:
@@ -280,7 +280,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member3:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.24
 
   member3quorum:
@@ -297,7 +297,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member3:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.42
 
   member4tessera:
@@ -308,7 +308,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member4:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.25
 
   member4quorum:
@@ -325,7 +325,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member4:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.43
 
   member5tessera:
@@ -336,7 +336,7 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member5:/config/keys
       - ./logs/tessera:/var/log/tessera/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.26
 
   member5quorum:
@@ -353,5 +353,5 @@ services:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member5:/config/keys
       - ./logs/quorum:/var/log/quorum/
     networks:
-      quorum-dev-quickstart:
+      quorum-benchmark:
         ipv4_address: 172.16.239.44
