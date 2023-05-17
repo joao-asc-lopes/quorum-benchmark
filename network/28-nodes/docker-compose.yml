@@ -555,7 +555,7 @@ services:
   member9tessera:
     << : *tessera-def
     ports:
-      - 9090:9080
+      - 9091:9080
     volumes:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member9:/config/keys
       - ./logs/tessera:/var/log/tessera/
@@ -583,7 +583,7 @@ services:
   member10tessera:
     << : *tessera-def
     ports:
-      - 9091:9080
+      - 9092:9080
     volumes:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member10:/config/keys
       - ./logs/tessera:/var/log/tessera/
@@ -611,7 +611,7 @@ services:
   member11tessera:
     << : *tessera-def
     ports:
-      - 9092:9080
+      - 9093:9080
     volumes:
       - ./${NODES_NUMBER}-nodes/${GOQUORUM_CONS_ALGO}/member11:/config/keys
       - ./logs/tessera:/var/log/tessera/
