@@ -11,13 +11,13 @@
   {
     "app":"ThirdParty",
     "enabled": true,
-    "serverAddress": "http://<HOST>:9080",
+    "serverAddress": "http://<HOSTNAME>:9080",
     "communicationType" : "REST"
   },
   {
     "app":"Q2T",
     "enabled": true,
-    "serverAddress": "http://<HOST>:9101",
+    "serverAddress": "http://<HOSTNAME>:9101",
     "sslConfig": {
       "tls": "OFF"
     },
@@ -26,7 +26,7 @@
   {
     "app":"P2P",
     "enabled": true,
-    "serverAddress": "http://<HOST>:9000",
+    "serverAddress": "http://<HOSTNAME>:9000",
     "sslConfig": {
       "tls": "OFF"
     },
@@ -35,7 +35,7 @@
   ],
   "peer": [
       {
-          "url": "http://<HOST>:9000"
+          "url": "http://<HOSTNAME>:9000"
       }
   ],
   "keys": {
