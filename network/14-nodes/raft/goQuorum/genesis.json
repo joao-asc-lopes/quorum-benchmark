@@ -2,7 +2,7 @@
   "nonce": "0x0",
   "timestamp": "0x58ee40ba",
   "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "gasLimit": "0xf7b760",
+  "gasLimit": "0xFFFF",
   "gasUsed": "0x0",
   "number": "0x0",
   "difficulty": "0x1",
