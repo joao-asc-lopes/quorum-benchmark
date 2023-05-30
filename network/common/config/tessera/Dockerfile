@@ -2,6 +2,8 @@ ARG TESSERA_VERSION=latest
 
 FROM quorumengineering/tessera:${TESSERA_VERSION}
 
+ARG NODES_NUMBER
+
 # develop uses a debain container, all releases use an alpine container - this allows both to be used for the quickstart
 # set the version in ../../.env
 RUN if [ -e /sbin/apk ] ; then apk add gettext --no-cache ; else apt-get update && apt-get install -y gettext && rm -rf /var/lib/apt/lists/* ; fi
