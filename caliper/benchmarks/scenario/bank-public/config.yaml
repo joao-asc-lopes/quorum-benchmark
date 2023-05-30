@@ -1,7 +1,7 @@
 bankArgs: &bank-args
   initialMoney: 10000
   moneyToTransfer: 1000
-  numberOfAccounts: &number-of-accounts 10000
+  numberOfAccounts: &number-of-accounts 100
 
 rateControl: &rate
   type: fixed-rate
@@ -34,7 +34,7 @@ test:
         arguments: *bank-args
     - label: transfer
       description: Test description for transferring money between accounts.
-      txNumber: 1000
+      txNumber: 100
       rateControl: *rate
       workload:
         module: benchmarks/scenario/bank-public/transfer.js
