@@ -19,6 +19,14 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
+    - job_name: validator0
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator0:9545 ]
+
     - job_name: validator1
       scrape_interval: 15s
       scrape_timeout: 10s
@@ -51,6 +59,94 @@ scrape_configs:
       static_configs:
         - targets: [ validator4:9545 ]
 
+    - job_name: validator5
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator5:9545 ]
+
+    - job_name: validator6
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator6:9545 ]
+
+    - job_name: validator7
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator7:9545 ]
+
+    - job_name: validator8
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator8:9545 ]
+
+    - job_name: validator9
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator9:9545 ]
+
+    - job_name: validator10
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator10:9545 ]
+
+    - job_name: validator11
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator11:9545 ]
+
+    - job_name: validator12
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator12:9545 ]
+
+    - job_name: validator13
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator13:9545 ]
+
+    - job_name: validator14
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator14:9545 ]
+
+    - job_name: validator15
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ validator15:9545 ]
+
     - job_name: rpcnode
       scrape_interval: 15s
       scrape_timeout: 10s
@@ -59,13 +155,13 @@ scrape_configs:
       static_configs:
         - targets: [ rpcnode:9545 ]
 
-    - job_name: newnode
+    - job_name: member0quorum
       scrape_interval: 15s
       scrape_timeout: 10s
       metrics_path: /debug/metrics/prometheus
       scheme: http
       static_configs:
-        - targets: [ newnode:9545 ]        
+        - targets: [ member0quorum:9545 ]
 
     - job_name: member1quorum
       scrape_interval: 15s
@@ -91,6 +187,78 @@ scrape_configs:
       static_configs:
         - targets: [ member3quorum:9545 ]
 
+    - job_name: member4quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member4quorum:9545 ]
+
+    - job_name: member5quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member5quorum:9545 ]
+
+    - job_name: member6quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member6quorum:9545 ]
+
+    - job_name: member7quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member7quorum:9545 ]
+
+    - job_name: member8quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member8quorum:9545 ]
+
+    - job_name: member9quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member9quorum:9545 ]
+
+    - job_name: member10quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member10quorum:9545 ]
+
+    - job_name: member11quorum
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /debug/metrics/prometheus
+      scheme: http
+      static_configs:
+        - targets: [ member11quorum:9545 ]
+
+    - job_name: member0tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member0tessera:9000 ]
+
     - job_name: member1tessera
       scrape_interval: 15s
       scrape_timeout: 10s
@@ -114,4 +282,68 @@ scrape_configs:
       scheme: http
       static_configs:
         - targets: [ member3tessera:9000 ]
+
+    - job_name: member4tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member4tessera:9000 ]
+
+    - job_name: member5tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member5tessera:9000 ]
+
+    - job_name: member6tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member6tessera:9000 ]
+
+    - job_name: member7tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member7tessera:9000 ]
+
+    - job_name: member8tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member8tessera:9000 ]
+
+    - job_name: member9tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member9tessera:9000 ]
+
+    - job_name: member10tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member10tessera:9000 ]
+
+    - job_name: member11tessera
+      scrape_interval: 15s
+      scrape_timeout: 10s
+      metrics_path: /metrics
+      scheme: http
+      static_configs:
+        - targets: [ member11tessera:9000 ]
 
