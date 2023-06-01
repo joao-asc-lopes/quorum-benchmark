@@ -5,22 +5,6 @@ bankArgs: &bank-args
 
 monitors:
   resource:
-#    - module: prometheus
-#      options:
-#        url: "http://localhost:9090"
-#        metrics:
-#          include: [*]
-#          queries:
-#            - name: CPU usage (%)
-#              query: system_cpu_sysload
-#              step: 1
-#              label: instance
-#              statistic: avg
-#            - name: Max Memory (MB)
-#              query: system_memory_used
-#              step: 10
-#              label: name
-#              statistic: max
     - module: docker
       options:
         interval: 5

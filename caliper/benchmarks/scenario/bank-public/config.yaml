@@ -8,6 +8,16 @@ rateControl: &rate
   opts:
     tps: 20
 
+monitors:
+  resource:
+    - module: docker
+      options:
+        interval: 5
+        containers:
+          - all
+        charting:
+          bar:
+            metrics: [ Memory(avg), CPU%(avg) ]
 test:
   name: bank
   description: >-
