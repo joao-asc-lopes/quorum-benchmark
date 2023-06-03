@@ -15,9 +15,6 @@ monitors:
         interval: 5
         containers:
           - all
-        charting:
-          bar:
-            metrics: [ Memory(avg), CPU%(avg) ]
 test:
   name: bank
   description: >-

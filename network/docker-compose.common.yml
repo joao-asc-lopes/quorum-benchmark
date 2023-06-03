@@ -29,17 +29,11 @@ services:
       quorum-benchmark:
         ipv4_address: 172.16.239.33
 
-  chaos-pause:
-    image: gaiaadm/pumba
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: "--log-level debug --interval 30s --random pause --duration 10s re2:^network-validator"
-
   chaos-delay:
     image: gaiaadm/pumba
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: "--log-level debug --interval 10s --random netem --tc-image gaiadocker/iproute2 --duration 6s delay re2:^network-validator"
+    command: "--log-level debug --interval 20s --random netem --tc-image gaiadocker/iproute2 --duration 10s delay re2:^network-validator"
 
 networks:
   quorum-benchmark:

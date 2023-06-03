@@ -1,6 +1,6 @@
 bankArgs: &bank-args
   initialMoney: 10000
-  moneyToTransfer: 100
+  moneyToTransfer: 1000
   numberOfAccounts: &number-of-accounts 5000
 
 rateControl: &rate
@@ -15,9 +15,6 @@ monitors:
         interval: 5
         containers:
           - all
-        charting:
-          bar:
-            metrics: [ Memory(avg), CPU%(avg) ]
 test:
   name: bank
   description: >-
