@@ -31,6 +31,7 @@ x-tessera-def:
       TESSERA_VERSION: ${TESSERA_VERSION:-latest}
   environment:
     TESSERA_MODE: tessera
+    NODES_NUMBER: ${NODES_NUMBER}
   expose:
     - 9000
     - 9080
