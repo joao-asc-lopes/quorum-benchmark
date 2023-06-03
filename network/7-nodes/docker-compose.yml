@@ -29,9 +29,9 @@ x-tessera-def:
     dockerfile: common/config/tessera/Dockerfile
     args:
       TESSERA_VERSION: ${TESSERA_VERSION:-latest}
+      NODES_NUMBER: ${NODES_NUMBER}
   environment:
     TESSERA_MODE: tessera
-    NODES_NUMBER: ${NODES_NUMBER}
   expose:
     - 9000
     - 9080
