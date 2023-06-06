@@ -1,4 +1,4 @@
-ARG TESSERA_VERSION=latest
+ARG TESSERA_VERSION
 
 FROM quorumengineering/tessera:${TESSERA_VERSION}
 
