@@ -16,7 +16,7 @@ for NODES_NUMBER in 7 12 17 22; do
         cd ./network || exit 1
         ./run.sh
         cd ..
-        sleep 120 # wait for network to init
+        sleep 90 # wait for network to init
         sed -i 's/tps:.*/tps: '$TPS'/' ./caliper/benchmarks/scenario/bank-"$TYPE"/config.yaml
         echo "Executing benchmark with $NODES_NUMBER, $CONSENSUS_ALGO, $TPS, $TYPE"
 
@@ -28,6 +28,7 @@ for NODES_NUMBER in 7 12 17 22; do
         fi
 
         cd ..
+        sleep 5
         cp ./caliper/report.html "$RESULTS_DIR"/report-$CONSENSUS_ALGO-$NODES_NUMBER-$TYPE-$TPS.html
         cd ./network || exit 1
         ./remove.sh
