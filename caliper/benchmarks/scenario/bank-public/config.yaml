@@ -6,7 +6,7 @@ bankArgs: &bank-args
 rateControl: &rate
   type: fixed-rate
   opts:
-    tps: 25
+    tps: 50
 
 monitors:
   resource:

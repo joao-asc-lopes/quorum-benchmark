@@ -1,0 +1,37 @@
+{
+    "caliper": {
+        "blockchain": "connector/index.js",
+        "command": {}
+    },
+    "ethereum": {
+        "url": "http://127.0.0.1:20000",
+        "contractDeployerAddress": "0x144333ec686ce5442063a8c6c9981da6ce84a0d8",
+        "contractDeployerAddressPrivateKey": "0xc3aebc91cefd0715b342c284e379e468b87e62d650d6709681236b31d98ebf8f",
+        "fromAddressSeed": "0x3f841bf589fdf83a521e55d51afddc34fa65351161eead24f064855fc29c9580",
+        "transactionConfirmationBlocks": 24,
+        "privacy":  {
+            "group": {
+                "groupType": "legacy",
+                "privateFrom": "TzCaxyz4IdSYn/in8LVTrTBHCfK/IaeLxVQo84O1Ciw=",
+                "privateFor": [
+                    "TzCaxyz4IdSYn/in8LVTrTBHCfK/IaeLxVQo84O1Ciw=",
+                    "Utoqm/k3Qy8kYpJ96FOxYewr7SCd6eNv89pqMTUxYWA=",
+                    "+XEUXAXKtBcVcOrEDqmb1+xE7kCQZa/ckUsrrmU8tX4=",
+                    "Eg0DjadbwUKBHSoOao8DjPfHOpN1/KVvX9CZVsj8r00=",
+                    "B76XciERdWDx7M50BD85guUrG7yyKXk35X40UUn31jQ="
+                ]
+            }
+        },
+        "contracts": {
+            "bank": {
+                "path": "benchmarks/scenario/bank-private/src/ethereum/bank/bank.json",
+                "gas": {
+                    "open": 45000,
+                    "query": 100000,
+                    "transfer": 70000
+                },
+                "private": "group"
+            }
+        }
+    }
+}
