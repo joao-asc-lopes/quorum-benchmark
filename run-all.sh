@@ -12,7 +12,7 @@ for NODES_NUMBER in 7 12 17 22; do
   for CONSENSUS_ALGO in raft clique ibft qbft; do
     sed -i 's/GOQUORUM_CONS_ALGO=.*/GOQUORUM_CONS_ALGO='$CONSENSUS_ALGO'/' $NETWORK_ENV_FILE
     for TYPE in public private; do
-      for TPS in 50 100 150 200 250 300; do
+      for TPS in 50 100 200 300; do
         cd ./network || exit 1
         ./run.sh
         cd ..
