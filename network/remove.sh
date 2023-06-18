@@ -22,9 +22,6 @@ removeDockerImage(){
   fi
 }
 
-echo "${bold}*************************************"
-echo "Quorum Dev Quickstart "
-echo "*************************************${normal}"
 echo "Stop and remove network..."
 
 docker compose -f docker-compose.common.yml -f "${NODES_NUMBER}-nodes/docker-compose.yml" down -v

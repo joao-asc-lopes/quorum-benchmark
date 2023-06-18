@@ -22,9 +22,6 @@ mkdir -p logs/besu logs/quorum logs/tessera
 # Build and run containers and network
 echo "docker-compose.yml" > ${LOCK_FILE}
 
-echo "${bold}*************************************"
-echo "Quorum Dev Quickstart"
-echo "*************************************${normal}"
 echo "Start network"
 echo "--------------------"
 
