@@ -20,7 +20,7 @@ Run a set of benchmarks for `goquorum` run using Hyperledger Caliper, under diff
 - By default, benchmarks for clique, raft, ibft and qbft are run on networks of 7, 12, 17 and 22 nodes, using both private and public transactions.
 - These can be re-configured by altering the `run-all.sh` script.
 - Networks with different configurations can be added to `network/X-nodes` by following the same structure.
-  - `quorum-genesis-tool` is recommended to generate new network configurations.
+  - [quorum-genesis-tool](https://github.com/ConsenSys/quorum-genesis-tool) is recommended to generate new network configurations.
   - To test private transactions on new networks, a network configuration file for it must also be added to `caliper/benchmarks/scenario/bank-private/network-Xnodes.json`, and an entry to call this script must be added to `caliper/package.json`.
 - New benchmark scenarios can also be added. The one included is the smallbank one from Hyperledger Caliper examples.
 - By default, a pumba instance is configured to introduce network latency to validator nodes at random.
